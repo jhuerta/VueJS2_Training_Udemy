@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <input type="text" :value="name">
+  <p>Vue is cool! - {{ name }} ({{age}})</p>
+  <p>Your age times 3: {{age*3}}</p>
+  <p>Random Number: {{randomNumber()}}</p>
+  <div><h3>Using :src</h3><img :src="vuelogo">
+    </div>
+    <div><h3>Using v-bind</h3>
+  <img v-bind:src="vuelogo">
+  </div>
+  
+</div>
+</body>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    name: 'Juan',
+    age: 39,
+    vuelogo:'https://cdn-images-1.medium.com/max/1200/1*yGrOUQyqX3MBekvP5d-pCA.png'
+
+  },
+  methods: {
+    randomNumber: function(){
+      return Math.floor(Math.random() * 100)  
+    }
+  }
+});
+
+</script>
+
+</html>

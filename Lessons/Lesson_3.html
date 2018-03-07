@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 3</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <input type="text" v-on:input='changeTitle'>
+  <p>{{title}}</p>
+</div>
+</body>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    title: ''
+  },
+  methods:{
+    changeTitle: function(evt) {
+      const title = 'Hello World - My first Vue app!';
+      this.title = title + evt.target.value;
+      
+    }
+  }
+});
+
+</script>
+
+</html>

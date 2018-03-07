@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <p v-once>Value of Title (v-once): {{title}}</p>
+  <p>Value of Title: {{title}}</p>
+  <hr>
+  <p v-html='htmltext'></p>
+  <hr>
+  <p>{{age}}</p>
+  <div>{{sayHello()}}</div>
+  
+  <a v-bind:href="link">Using v-bind to pass the link</a>
+</div>
+</body>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Hello World! (initial value of title)',
+    age: 9,
+    link: 'http://google.com',
+    htmltext: '<h1 style="color:red">This is h1 value</h1>'
+
+  },
+  methods: {
+    sayHello: function(){
+      this.title = 'New value of itle'
+      return 'Hello from function! - Age: ' + this.age;
+    }
+  }
+});
+
+</script>
+
+</html>

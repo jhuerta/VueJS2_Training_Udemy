@@ -4,3 +4,10 @@
 - Access methods and properties (data) through this
 - v-on:EVENT_NAME='DO_THIS' : Listen on event and do something
 - v-on:input : Event triggered on input
+
+
+* Section 2
+- Directives:
+	v-once
+	v-html
+	v-bind
