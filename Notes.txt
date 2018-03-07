@@ -1,0 +1,6 @@
+- Lesson 1: https://codepen.io/jhbrogeras/pen/QOZVdY
+
+- A Vue instance (new Vue) defines the application, and it selcts a bit of the HTML
+- Access methods and properties (data) through this
+- v-on:EVENT_NAME='DO_THIS' : Listen on event and do something
+- v-on:input : Event triggered on input
