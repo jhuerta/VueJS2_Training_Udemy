@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+    <style>
+      .square {width:100px;height: 100px;background-color: grey;margin:5px;}
+      .red {background-color: red;}
+      .green {background-color: green;}
+      .blue {background-color: blue;}
+</style>
+</head>
+
+<body>
+<div id="app">
+  <div class='square' @click='attachRed = !attachRed' :class="redOrBlue"></div>
+  <div class='square' @click='attachGreen = !attachGreen' :class="{'green': attachGreen}"></div>
+  <div class='square' @click='attachBlue = !attachBlue' :style="{ 'background-color': color }"></div>
+  <div class='square' @click='attachBlue = !attachBlue' :class="color" ></div>
+  <div class='square' :style="myStyle" ></div>
+  <div class='square' @click='attachBlue = !attachBlue' :class="[color,{red: attachRed}]" ></div>
+  <hr>
+  <input type="text" v-model='color'>
+  <input type="text" v-model='width'>
+</div>
+</body>
+
+<script>
+new Vue({                           
+  el: '#app',
+  data: {
+    color:'',
+    width:0,
+    attachRed: false,
+    attachGreen: false,
+    attachBlue: false,
+  },
+  computed: {
+    redOrBlue: function(){
+      return {
+        red: this.attachRed,
+        blue: this.attachBlue,
+       [this.color]: true,
+      }
+    },
+    myStyle: function(){
+      return {
+        backgroundColor: this.color,
+        width: this.width + 'px',
+      }
+    }
+  },
+  methods: {
+    increaseCounter: function(){
+      return this.counter++;
+    }
+  }
+});
+
+</script>
+
+</html>

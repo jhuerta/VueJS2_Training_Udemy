@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+
+        <style>
+      .square {width:100px;height: 100px;border: 5px grey solid;margin:5px;}
+      .taller {height: 100px;width:50px;}
+      .wider {height: 50px;width:100px;}
+      .red {background-color: red;}
+      .green {background-color: green;}
+      .blue {background-color: blue;}
+</style>
+
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model='dynamic_class'>
+        <button @click='startEffect'>Start Effect</button>
+        <button @click='stopEffect'>Stop Effect</button>
+        <div :class="['square',tallOrWide]" :style='dynamic_color'></div>
+        <div :class="['square','taller',{green:tallerThanWider},dynamic_class]" ></div>
+
+        <hr>
+        Aspect: <input type="text" v-model='flip'>
+        Color: <input type="text" v-model='class_color'>
+        <div :class="['square',class_color, {taller: flip, wider: !flip}]">{{flip}} | {{!flip}}</div>
+
+        <hr>
+        Background Color: <input type="text" v-model='div_bg_color'>
+        Width: <input type="text" v-model='div_width'>
+        <div :class="['square']" :style="dynamic_style" ></div>
+
+        <hr>
+        <button @click='startProgressBar'>Start</button>
+        <button @click='stopProgressBar'>Stop</button>
+        <div :style="progress_bar" ></div>
+
+
+
+
+
+
+    </div>
+</body>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        div_bg_color: 'green',
+        div_width: '100',
+        class_color: '',
+        flip: false,
+        dynamic_class: 'blue',
+        color: 5000,
+        tallerThanWider: false,
+        intervalId: 0,
+        progress_bar_width: 0,
+        progressBarIntervalId: 0,
+    },
+    computed:
+    {
+        progress_bar: function()
+        {
+            return {
+                backgroundColor: '#' + (this.progress_bar_width + 100),
+                height: '25px',
+                width: this.progress_bar_width + 'px',
+            }
+        },
+        tallOrWide: function()
+        {
+            return {
+                taller:this.tallerThanWider,
+                wider: !this.tallerThanWider,
+            }
+        },
+        dynamic_color: function()
+        {
+            return {
+                backgroundColor: '#' + this.color,
+            }
+        },
+        dynamic_style: function()
+        {
+            return {
+                backgroundColor: this.div_bg_color,
+                width: this.div_width + 'px',
+            }
+        }
+    },
+    methods:
+    {
+        startProgressBar: function()
+        {
+            var vueInstance = this;
+            vueInstance.progressBarIntervalId = setInterval(function(){
+                
+                vueInstance.progress_bar_width = (vueInstance.progress_bar_width + 1) % 200;
+            }, 100);
+
+        },
+        stopProgressBar: function()
+        {
+            clearInterval(this.progressBarIntervalId);
+
+        },
+        stopEffect: function()
+        {
+            clearInterval(this.intervalId);
+        },
+        startEffect: function()
+        {
+            var vueInstance = this;
+            vueInstance.intervalId = setInterval(function()
+                {
+                vueInstance.tallerThanWider = !vueInstance.tallerThanWider;
+
+                    vueInstance.color++;
+                },200);
+        }
+    }
+});
+</script>
+
+</html>

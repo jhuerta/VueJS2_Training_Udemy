@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <p>{{counter}}</p>
+  <button v-on:click='increaseCounter'>Increase Counter</button>
+  <input type="text" v-model='counter'>
+  {{result()}} | {{ output }}
+  
+  
+</div>
+</body>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    counter: 0,
+  },
+  computed: {
+    output : function()
+    {
+      if(this.counter > 5)
+      {
+       return 'Greater Than 5 - ' + ' ' + this.counter;
+      }
+    }
+  },
+  watch: {
+    counter: function(value)
+    {
+      // Watchout with this!!! Inside the clousre, this wont be vue entity!
+      var vueEntity = this;
+      setTimeout(function(){
+        vueEntity.counter = 0;
+      },2000);
+    } 
+  },
+  methods: {
+    result: function(msg)
+    {
+      if(this.counter > 5)
+      {
+       return 'Greater Than 5';
+      }
+    },
+    increaseCounter: function(){
+      this.counter++;
+      
+    }
+  }
+});
+
+</script>
+
+</html>

@@ -10,7 +10,27 @@
 - Directives:
 	v-once
 	v-html
-	v-bind
+	v-bind:'attribute'='method' === :attribute="method"
+	v-on:event='method' === @event='method'
 	v-on: Listen on events (v-on:event='action_to_execute')
 	v-on: Listen on events (v-on:event='action_to_execute(arg_1, $event)')
 		$event is a reserve keyword to pass the event object (which is passed by default if only one argument)
+	v-model: 2 ways binding
+- Computed property will only be executed if any of the variables inside the method changes. However, if using a method as a varible, that method used in a variable will be executed EVERYTIME A data property changes values (everytime the DOM changes), regardless whether it is used or no in the method. It runs synchronously!!
+- watch: Watches variables and acts if there is a change
+- computed, watched, data
+	watched is on variables that are defined in data or computed. So, when the data variable changes, the watched method is execute
+	computed is a variable that depends on the DOM. Everytime the DOM changes, the computed will be executed, regardless the computed depends on the property that has changed or not
+- :class="{'class_name_1': boolean_property,class_name_2': boolean_property}"
+- :class="computed_property"
+	computed_property: function(){
+		return 
+			{
+				'class_name_1': boolean_property,
+				class_name_2': boolean_property
+			}
+	}
+- Multiple ways to attach dynamically a class:
+	- Using a variable to modify the inline style
+	- Using a computed property to retun an object with class: boolean
+	- Assigning an array wih classes. This array can contain a mix of classes and boolean classes

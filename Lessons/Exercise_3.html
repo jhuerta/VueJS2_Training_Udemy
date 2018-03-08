@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        Current Value: {{result_computed}}
+        <button @click='add(5)'>Add 5</button>
+        <button @click='add(1)'>Add 1</button>
+
+    </div>
+</body>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        result: 0,
+    },
+    watch:{
+        result_computed()
+        {
+
+            var vueInstance = this;
+            setTimeout(function(){
+                console.log('Watched Result executed!');
+                vueInstance.result = 0;
+            },1000);
+
+
+        }
+    },
+    computed:
+    {
+        result_computed(){
+            if(this.result %3)
+            {
+            return `NOT divided by 3 ( ${this.result} )` ;
+            }
+            return `Divided by 3 ( ${this.result} )` ;
+        }
+
+    },
+    methods: {
+        add: function(increment)
+        {
+            this.result = this.result + increment;
+        }
+    }
+});
+</script>
+
+</html>
