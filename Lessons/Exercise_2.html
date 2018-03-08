@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click='displayAlert'>Show Alert</button>
+        <input type="text" v-on:keydown='captureKeyPressed' v-on:keydown.enter='captureKeyPressedOnEnter'>
+        <p>Key Pressed: {{keyPressed}}</p>
+        <p>Key Pressed on Enter: {{keyPressedOnEnter}}</p>
+    </div>
+</body>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        keyPressed: '',
+        keyPressedOnEnter: ''
+    },
+    methods: {
+        displayAlert: function() {
+            alert('Button Clicked!');
+        },
+        captureKeyPressed: function(evt) {
+            this.keyPressed = evt.target.value;
+        },
+        captureKeyPressedOnEnter: function(evt) {
+            this.keyPressedOnEnter = evt.target.value;
+        }
+    }
+});
+</script>
+
+</html>

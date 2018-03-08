@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div style="font-size: 20px;font-weight: bold; background:#AED6F1;height:250px; width: 200px;" v-on:mousemove='updateCoordinates'>
+            <p>Mouse Over: X: {{mouse_x}} / Y: {{mouse_y}}</p>
+            <div style="font-size: 15px;font-weight: bold; background:red;height:75px; width: 150px;" v-on:mousemove='doNothing'>
+                <p>DO NOT UPDATE HERE (using stopPropagation)</p>
+            </div>
+            <div style="font-size: 15px;font-weight: bold; background:green;height:75px; width: 150px;" v-on:mousemove.stop='logAlert'>
+                <p>DO NOT UPDATE HERE (using modifier)</p>
+            </div>
+        </div>
+        <div>
+            <p>
+                <button v-on:click='increaseCounter(mouse_x,mouse_y,$event)'>Increase Counter: {{counter}}</button>
+            </p>
+        </div>
+        <div>
+            <p>
+                <input type="text" v-on:keyup='consoleLogText' v-on:keyup.enter='alertEnter'>
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        counter: 0,
+        mouse_x: 0,
+        mouse_y: 0,
+    },
+    methods: {
+        increaseCounter: function(x, y, evt) {
+            this.counter = `X: ${x} Y: ${y} - ${evt.clientX}`;
+        },
+        updateCoordinates: function(evt) {
+            this.mouse_x = evt.clientX;
+            this.mouse_y = evt.clientY;
+        },
+        doNothing: function(evt) {
+            evt.stopPropagation();
+        },
+        logAlert: function() {
+            console.log('stop modifier');
+        },
+        consoleLogText: function() {
+            if(event.key!='Enter')
+            {
+            console.log(event.key);
+            }
+        },
+        alertEnter:function(){
+          alert('Enter!');
+        }
+    }
+});
+</script>
+
+</html>

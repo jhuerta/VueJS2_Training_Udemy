@@ -11,3 +11,6 @@
 	v-once
 	v-html
 	v-bind
+	v-on: Listen on events (v-on:event='action_to_execute')
+	v-on: Listen on events (v-on:event='action_to_execute(arg_1, $event)')
+		$event is a reserve keyword to pass the event object (which is passed by default if only one argument)
