@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+    <style>
+    .className {
+        color: red;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click='show=!show'>Toggle Show</button>
+        <span v-if='show'>You can see me</span>
+        <span v-if='show'>
+            <p>Inside a template</p>
+        </span>
+        <p v-else>But you see this!</p>
+        <hr>
+        <div v-show='show'>
+            Hiding by using v-how (hide or not hide)
+        </div>
+        <hr>
+        <h2>Using Lists</h2>
+        <h3>Ingredients</h3>
+        <ul>
+            <li v-for='ingredient in ingredients'>
+                {{ingredient}}
+            </li>
+        </ul>
+        <h3>People</h3>
+        <ul>
+            <li v-for='(person, index) in people'>
+                [{{index}}] {{person.name}} {{person.lastname}} ({{person.age}})
+            </li>
+        </ul>
+        <hr>
+        <h3>Alternative synta (using template)</h3>
+        <span v-for='(person, index) in people'>
+          <p>
+            [{{index}}] {{person.name}} {{person.lastname}} ({{person.age}})
+          </p>
+        </span>
+        <hr>
+        <span v-for='person in people'>
+      <p>
+        <span v-for='(detail,fieldName, index) in person'>
+          <b>{{fieldName}} [{{index}}]: </b>{{detail}}
+        </span>
+        </p>
+        <hr>
+        <h3>Looping Through numbers</h3>
+        <span v-for='number in 10'>
+        {{number}}
+      </span>
+        </span>
+
+
+          <hr>
+
+
+
+<button @click='listOfNumbers.push(listOfNumbers[listOfNumbers.length-1] + 1)'>Add Number</button>
+<button @click='listOfNumbers.splice(-1,1)'>Remove Number</button>
+
+<template v-for='number in listOfNumbers'>
+  <span>{{number}} </span>
+  
+</template>
+
+<hr>
+<h3>Binding to Key</h3>
+<ul>
+  <li v-for='(person, index) in people' :key='index'>
+    {{person.name }}
+    
+  </li>
+</ul>
+
+
+    </div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+      listOfNumbers:[1,2,3,4,5],
+        show: true,
+        ingredients: ['tomato', 'cheese', 'dough'],
+        people: [
+            { name: 'Juan', lastname: 'Huerta', age: 40 },
+            { name: 'Miguel', lastname: 'H', age: 3 },
+            { name: 'Sofia', lastname: 'Gelera', age: 1 },
+        ]
+    },
+    methods: {
+        increaseCounter: function() {
+            return this.counter++;
+        }
+    }
+});
+</script>
+
+</html>

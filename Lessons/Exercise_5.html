@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h3>Ex 1</h3>
+        <button @click='hideElementOne = !hideElementOne'>Hide</button>
+        <span style="border:red solid 3px" v-if='hideElementOne'>Hidden using v-if</span>
+        <span style="border:green solid 3px" v-else>Showing using v-if</span>
+        <span>One</span>
+        <button @click='hideElementTwo = !hideElementTwo'>Hide</button>
+        <span style="border:blue solid 3px" v-show='hideElementTwo'>Hidden using v-show</span>
+        <span style="border:pink solid 3px" v-show='!hideElementTwo'>Showing using v-if</span>
+        <span>Two</span>
+        <hr>
+        <h3>Ex 2</h3>
+        <ul>
+            <li v-for='(number, index) in numbers'>{{number}} ({{index}})</li>
+        </ul>
+        <hr>
+        <h3>Ex 3</h3>
+        <ul>
+            <li v-for='(person,index) in people'>
+            <span v-for='(value, fieldName, fieldIndex) in person'>
+              {{fieldName}}:  {{value}} (Field Index:{{fieldIndex}},Record Index: {{index}})
+            </span>
+                
+            </li>
+        </ul>
+        <hr>
+        <h3>Ex 4</h3>
+        <ul>
+            <li v-for='someData in mixdata'>
+
+
+              <ul v-if='Array.isArray(someData)'>
+                <li><b>It is an array!!!!!!!</b></li>
+                <li v-for='values in someData'>
+                  {{values}}
+                </li>
+              </ul>
+              <span v-else>The Value: {{someData}}</span>
+            
+                
+            </li>
+        </ul>
+            
+                
+            </li>
+        </ul>
+
+    </div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        hideElementOne: false,
+        hideElementTwo: false,
+        numbers: ['One', 'Two', 'Three'],
+        people: [
+            { name: 'Juan', age: 30 },
+            { name: 'Sofia', age: 35 },
+            { name: 'Miguel', age: 40 },
+        ],
+        mixdata: {
+          name: 'Juan',
+          age: 40,
+          addresses: ['One','Two','Three']
+        }
+    },
+    methods: {}
+});
+</script>
+
+</html>

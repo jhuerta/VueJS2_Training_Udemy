@@ -34,3 +34,6 @@
 	- Using a variable to modify the inline style
 	- Using a computed property to retun an object with class: boolean
 	- Assigning an array wih classes. This array can contain a mix of classes and boolean classes
+- v-if will remove the element from the DOM (not hide, but rather completely remove)
+-v-show : To hide, rather than removing from the dom
+- make sure to add a :key directive when using for loop, to avoid unexepcted behavior
