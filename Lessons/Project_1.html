@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Project  1</title>
+    <script src="dist/vue.js"></script>
+
+    <style>
+      .health-bar {  color: green;background-color: blue; min-height: 40px;}
+      .odd { background-color: cyan; }
+      .even { background-color: orange;}
+      .fighLog {width: 350px;}
+      .winner {  color: white;background-color: red; min-height: 70px; width: 400px; font-size: 60px;font-weight: bolder;border: 2px solid black;padding: 10px;;margin:20px;}
+      
+.tie {  color: white;background-color: green; min-height: 70px; width: 400px; font-size: 60px;font-weight: bolder;border: 2px solid black;padding: 10px;margin:20px;}
+
+
+      
+      .health-bar-max{  background-color: LightGray;}
+      .loose {  background-color: pink;}
+</style>
+</head>
+
+<body>
+<div id="app">
+
+  <div>Monster</div>
+initialStrength
+  <div :class="['health-bar-max', monsterHealth < 0 ? 'loose': '']" :style="{width: barLength + 'px'}">
+  <div :class="['health-bar' ]" :style="{width: monsterHealthWidth}"></div>
+  </div>
+  <div>{{monsterHealth/100*barLength}}</div>
+
+
+
+  <div>Player</div>
+  <div :class="['health-bar-max', playerHealth < 0 ? 'loose': '']" :style="{width: barLength + 'px'}">
+  <div class="health-bar" :style="{width: playerHealthWidth}"></div>
+  </div>
+  <div>{{playerHealth/100*barLength}}</div>
+
+  <button v-if='!gameHasFinished' @click='attack'>Attack</button>
+  <button @click='reset'>Reset</button>
+  <button :disabled='gameHasFinished' @click='heal'>Heal</button>
+
+  <div v-if='!isTie && winner' class="winner">{{winner}} wins!</div>
+  <div v-if='isTie' class="tie">TIE</div>
+
+  <template v-for="(log,index) in fightLog">
+    <div :class="['fighLog',index%2 ? 'odd':'even']">{{fightLog.length - index}} - {{log}}</div>
+  </template>
+  
+  
+  
+</div>
+</body>
+
+<script>
+
+new Vue({
+  el: '#app',
+  created(){
+       this.monsterHealth = this.fullPercentage;
+      this.playerHealth = this.fullPercentage;
+    },
+  data: {
+    isTie: false,
+    winner: '',
+    fullPercentage: 100,
+    barLength: 666,
+      playerHealth: 0,
+      monsterHealth: 0,
+    fightLog: [],
+  },
+  computed:
+  {
+    monsterHealthWidth: function()
+    {      
+      var health = this.monsterHealth > 0 ? this.monsterHealth : 0;
+      return health + '%'
+    },
+    playerHealthWidth: function()
+    {
+      var health = this.playerHealth > 0 ? this.playerHealth : 0;
+      return health + '%'
+    },
+        gameHasFinished: function()
+    {
+      return (this.monsterHealth < 0 || this.playerHealth < 0);
+    },
+  },
+  watch: {
+    monsterHealth: function(){
+      if(this.monsterHealth < 0)
+      {
+        if(this.winner)
+          {
+            this.isTie = true;
+          };
+       this.winner = 'player';
+      }
+    },
+    playerHealth: function(){
+      if(this.playerHealth < 0)
+      {
+        if(this.winner)
+          {
+            this.isTie = true;
+          };
+        this.winner = 'monster';
+      }
+    },
+  },
+  methods: {
+    getRandomImpact: function(){
+      var minForce = 1;
+      var maxForce = 5;
+      return Math.floor(Math.random() * maxForce) + minForce;
+    },
+    reset: function(){
+      this.monsterHealth = this.fullPercentage;
+      this.playerHealth = this.fullPercentage;
+      this.fightLog  = [];
+      this.fightLog.unshift('Game Reseted');
+      this.winner = '';
+      this.isTie = false;
+    },
+    attack: function(){
+      var playerForce = this.getRandomImpact();
+      var monsterForce = this.getRandomImpact();
+      this.monsterHealth = this.monsterHealth - playerForce;
+      this.playerHealth = this.playerHealth - monsterForce;
+      this.fightLog.unshift('Player damaged by ' + (monsterForce/100)*this.barLength);
+      this.fightLog.unshift('Monster damaged by ' + (playerForce/100)*this.barLength);
+    },
+    heal: function(){
+      var playerHeal = this.getRandomImpact();
+      var monsterForce = this.getRandomImpact();
+      this.playerHealth = this.playerHealth - monsterForce;
+
+      // Preventing the health to go above 100%
+      this.playerHealth = Math.min(this.playerHealth + playerHeal,this.fullPercentage);
+      this.fightLog.unshift('Player damaged by ' + (monsterForce/100)*this.barLength);
+      this.fightLog.unshift('Player healed by ' + (playerHeal/100)*this.barLength);
+    },
+  }
+});
+
+</script>
+
+</html>
