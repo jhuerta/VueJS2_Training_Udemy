@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+
+    <style>
+      .className {color: red;}
+</style>
+</head>
+
+<body>
+  aaaa
+<div id="app1">
+  <p>{{counter}}</p>
+  <button v-on:click='whoIAm'>Increase Counter - <div v-if='show'>App 1</div></button>
+  <button v-on:click='changeApp2'>Change App 2 </button>
+
+    <div ref='div_main'>Text Ref Main</div>
+    <div ref='div_secondary'>Text Ref Secondary</div>
+    <button @click='changeRef'>Change Ref Values</button>
+</div>
+
+<div id="app2">
+  <p>{{counter}}</p>
+  
+  <button v-on:click='whoIAm'>Increase Counter - <div v-if='show'>App 2</div></button>
+</div>
+
+</body>
+
+<script>
+
+// Data can be specified outside
+  var vm_app_1_data = {
+    counter: 0,
+    show: true,
+  };
+
+var vm_app_1 = new Vue({
+  el: '#app1',
+  data: vm_app_1_data,
+  methods: {
+    changeRef: function()
+    {
+      this.$refs.div_main.innerText = this.$refs.div_main.innerText + this.counter;
+      this.$refs.div_secondary.innerText = this.$refs.div_secondary.innerText + this.counter;
+
+    },
+    changeApp2: function()
+    {
+      vm_app_2.whoIAm();
+      // It is possible to access the data of other Vue instance (directly or throgh $data)
+      vm_app_2.$data.counter = vm_app_2.counter*10;
+
+    },
+    whoIAm: function(){
+      this.counter++;
+      this.show= !this.show;
+      console.log('Im app 1');
+    }
+  }
+});
+
+setInterval(function(){
+  var aux = vm_app_1.counter;
+  vm_app_1.counter = vm_app_2.counter;
+  vm_app_2.counter = aux;
+
+   }, 3000)
+
+
+var vm_app_2 = new Vue({
+  el: '#app2',
+  data: {
+    counter: 0,
+    show: true,
+  },
+  methods: {
+    whoIAm: function(){
+      this.counter++;
+      this.show= !this.show;
+      console.log('Im app 2');
+    }
+  }
+});
+
+</script>
+
+</html>
