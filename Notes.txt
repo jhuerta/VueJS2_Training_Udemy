@@ -42,3 +42,17 @@
 - It is possible to tag an element in the dom with ref='ANY_NAME'. Then, inside the vue instance or outside, this DOM element is accessible throuh vue_instance.$refs.ANY_NAME (or this.$refs....). Notice that modifying the DOM directly may not have the desired effect, as Vue will refresh it automatically based on its own copy of the DOM. However, thi is handy to retrieve values from the DOM (or playing with the DOM other than to modify it).
 - It is possible to pass the template as the object selector to a Vue instance:
 	vm.mount('#id_app');
+- Using development workflow with Vue CLI:
+	* npm install -g vue-cli
+	* Choose Template:
+		Simple
+		WebPack Simple <=== Preferred
+		Webpack
+		Browserify/Browserify Serify (instead of webpack)
+	* npm install -g vue-cli
+	* vue cli proxy: 
+		set HTTP_PROXY=http://193.247.49.64:3128
+		set HTTPS_PROXY=http://193.247.49.64:3128
+	* npm proxy:
+		npm config set proxy http://193.247.49.64:3128
+		npm config set https-proxy http://193.247.49.64:3128
