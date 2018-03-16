@@ -40,3 +40,5 @@
 - data (or any other object passed to the Vue instance constructor), can be created outside the Vue constructor itself, as any regular javascript object.
 - If the vue instance is stored into a variable, its data and methods can be accessed from any other Javascript object, inclusing any other Vue object
 - It is possible to tag an element in the dom with ref='ANY_NAME'. Then, inside the vue instance or outside, this DOM element is accessible throuh vue_instance.$refs.ANY_NAME (or this.$refs....). Notice that modifying the DOM directly may not have the desired effect, as Vue will refresh it automatically based on its own copy of the DOM. However, thi is handy to retrieve values from the DOM (or playing with the DOM other than to modify it).
+- It is possible to pass the template as the object selector to a Vue instance:
+	vm.mount('#id_app');

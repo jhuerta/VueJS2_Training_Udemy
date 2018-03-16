@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+
+    <style>
+      .className {color: red;}
+</style>
+</head>
+
+<body>
+<div id="app">
+  <h2>{{title}}</h2>
+  <button @click="newTitle">Update Title</button>
+  <button @click="destroy">Destroy</button>
+</div>
+</body>
+
+<script>
+new Vue({
+  el: '#app',
+  data: {
+    title: 'Title From Data',
+  },
+  methods:{
+    destroy: function(){
+      this.$destroy();
+    },
+    newTitle: function(){
+      this.title = 'New Title ' + Date.now();
+    }
+  },
+  beforeCreate: function(){
+    console.log('Before Create')
+  },
+    created: function(){
+    console.log('created')
+  },
+    beforeMount: function(){
+    console.log('Before Mount')
+  },
+    mounted: function(){
+    console.log('Mounted')
+  },
+    beforeUpdate: function(){
+    console.log('Before Update')
+  },
+  updated: function(){
+    console.log('Updated')
+  },
+  beforeDestroy: function(){
+    console.log('Before Destroy')
+  },
+  destroyed: function(){
+    console.log('Destroyed')
+  },
+});
+
+</script>
+
+</html>

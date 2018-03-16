@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 10</title>
+    <script src="dist/vue.js"></script>
+
+    <style>
+      .className {color: red;}
+</style>
+</head>
+
+<body>
+<div id="app1">
+  <p>Counter 1: {{counter}}</p>
+  <button v-on:click='increaseCounter'>Increase Counter</button>
+  
+</div>
+
+<div id="app2">
+  <p>Counter 2: {{counter}}</p>
+  <button v-on:click='increaseCounter'>Increase Counter</button>
+
+<div style="border: 5px solid red;margin: 5px; padding: 5px;">
+  <h2>Using componentes</h2>
+<helloworld></helloworld>  
+<helloworld></helloworld>  
+<helloworld></helloworld>  
+</div>
+
+</div>
+
+
+
+</body>
+
+<script>
+
+  Vue.component('helloworld',{
+    template: '<h1>Hello World</h1>'
+  });
+
+
+new Vue({
+  el: '#app1',
+  data: {
+    counter: 0,
+  },
+  methods: {
+    increaseCounter: function(){
+      return this.counter++;
+    }
+  }
+});
+
+var vm2 = new Vue({
+  
+  data: {
+    counter: 0,
+  },
+  methods: {
+    increaseCounter: function(){
+      return this.counter++;
+    }
+  }
+});
+
+vm2.$mount('#app2');
+
+</script>
+
+</html>
