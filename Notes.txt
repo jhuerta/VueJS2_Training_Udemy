@@ -56,3 +56,6 @@
 	* npm proxy:
 		npm config set proxy http://193.247.49.64:3128
 		npm config set https-proxy http://193.247.49.64:3128
+- Components can be registered locally or globally
+- Components can be named as camel case, and use with hyphen. Altough is preferible to name it the same as it is used
+- Remember the style in a component can be scoped per component (instead of globally by default). Use <style scoped>
