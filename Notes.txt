@@ -59,3 +59,11 @@
 - Components can be registered locally or globally
 - Components can be named as camel case, and use with hyphen. Altough is preferible to name it the same as it is used
 - Remember the style in a component can be scoped per component (instead of globally by default). Use <style scoped>
+- Communication between components:
+	- Parent to child: pass a prop
+	- Child to parent: 
+		1) modify the prop (not a good idea, tons of issues)
+		2) Custom event from child to parent
+		3) The parent pass a method as a prop that the child use - Preferred
+	- Child to child (siblings): Communicate to parent and the parent will communicate to the other siblings
+	- Universal way: Create a global bus event. Emit events through the global bus, and add listeners in the created method to the global bus (attention to accessing this inside a ON!! Use ES6 nomenclature or assign self = this);

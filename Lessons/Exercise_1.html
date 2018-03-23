@@ -8,7 +8,15 @@
 </head>
 
 <body>
+  
+
+<v-text ag-number=1>
+ </v-text>
+
 <div id="app">
+  <h1>Hola : {{message}}</h1>
+  <button @click='upateMessage'>Update Message</button>
+  <hr>
   <input type="text" :value="name">
   <p>Vue is cool! - {{ name }} ({{age}})</p>
   <p>Your age times 3: {{age*3}}</p>
@@ -26,13 +34,19 @@
 new Vue({
   el: '#app',
   data: {
+    message: 'My message',
     name: 'Juan',
     age: 39,
     vuelogo:'https://cdn-images-1.medium.com/max/1200/1*yGrOUQyqX3MBekvP5d-pCA.png'
 
   },
   methods: {
+    upateMessage: function()
+    {
+      this.message = 'New message ***********';
+    },
     randomNumber: function(){
+
       return Math.floor(Math.random() * 100)  
     }
   }
