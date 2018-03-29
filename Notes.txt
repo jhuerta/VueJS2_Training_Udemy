@@ -67,3 +67,6 @@
 		3) The parent pass a method as a prop that the child use - Preferred
 	- Child to child (siblings): Communicate to parent and the parent will communicate to the other siblings
 	- Universal way: Create a global bus event. Emit events through the global bus, and add listeners in the created method to the global bus (attention to accessing this inside a ON!! Use ES6 nomenclature or assign self = this);
+- Use slots (and named slots) to pass sub html template to other components. Notice default slots and default content
+- Use component element to load dynamically components (
+<component is:'componentName'> </component>). Notice that by default, the component is destroyed and recreated (destroyed method is called). Wrap the component up under keep-alive tag to keep the value and prevent it from being destroyed. Still, there are lifecycle hooks to control the lifecycle of the component. For dynamic components, there are new lifecycle hooks: deactivated and activated
