@@ -1,38 +1,33 @@
 <template>
     <div class="container">
-    	<input type="text" v-model='new_quote' >
-    	<button @click="addNewQuote(new_quote)">Add Quote</button>
-    	<div v-for='(quote_text,ind) in quotes'>
-    		<quote :delete_fnc='removeQuote' :quote_id='ind'>{{quote_text}}</quote>
+    	<div class="row">
+    		<quotes_counter> {{quotes.length}} </quotes_counter>
+    		<header_progress :quote_perc='quotes.length' ></header_progress>
     	</div>
+    	<div class="row">
+    		<quotes :quotes='quotes'></quotes>
+    	</div>
+
     </div>
 </template>
 
 <script>
 	import Quote from './quote.vue';
+	import Quotes from './quotes.vue';
+	import Quotes_Counter from './quotes_counter.vue';
+	import Header from './Header.vue';
     export default {
     	data: function(){
     		return {
-    			quotes: ['one','two','three','four','five','six'],
-    			new_quote: '',
+    			quotes: ['1','2','3','4','5','6'],
     		}
     	},
   components: {
     'quote': Quote,
+    'quotes': Quotes,
+    'quotes_counter':  Quotes_Counter ,
+    'header_progress':  Header ,
   },
-  methods:{
-  	addNewQuote(quote){
-  		console.log(quote);
-  		this.quotes.push(quote);
-  		this.new_quote = '';
-  	},
-  	removeQuote(ind)
-  	{
-  		console.log(ind);
-  		console.log(this.quotes);
-  		 this.quotes.splice(ind, 1);
-  	}
-  }
     }
 </script>
 

@@ -70,3 +70,5 @@
 - Use slots (and named slots) to pass sub html template to other components. Notice default slots and default content
 - Use component element to load dynamically components (
 <component is:'componentName'> </component>). Notice that by default, the component is destroyed and recreated (destroyed method is called). Wrap the component up under keep-alive tag to keep the value and prevent it from being destroyed. Still, there are lifecycle hooks to control the lifecycle of the component. For dynamic components, there are new lifecycle hooks: deactivated and activated
+- Use click.native modifier in a custom element to add a click method to a div (html element) inside the component
+- Use click.prevent in submit button in form to prevent submitting (and therefore reloading)
