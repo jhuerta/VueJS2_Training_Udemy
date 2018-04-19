@@ -72,3 +72,10 @@
 <component is:'componentName'> </component>). Notice that by default, the component is destroyed and recreated (destroyed method is called). Wrap the component up under keep-alive tag to keep the value and prevent it from being destroyed. Still, there are lifecycle hooks to control the lifecycle of the component. For dynamic components, there are new lifecycle hooks: deactivated and activated
 - Use click.native modifier in a custom element to add a click method to a div (html element) inside the component
 - Use click.prevent in submit button in form to prevent submitting (and therefore reloading)
+- v-model Modifiers:
+	.lazy: The property will be only updated once the focus leaves the controls 
+	.number: force to string to be converted to numbe
+	.trim: remove excess space before/after
+- Use v-model in controls to bind the control to a property. Use arrays in checkboxes (or multiple choice values)
+- You can create your own controls by mimicing the use of model (v-model) and input event
+- Add prevent modifier to submit event to avoid the request being sent to the server (default behavior). Instead, we'll handle how to send data to server
